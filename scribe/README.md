@@ -13,7 +13,8 @@ claude --plugin-dir ./examples/scribe-plugin
 ### From Marketplace
 
 ```bash
-claude plugin install scribe@<marketplace-name>
+claude plugin marketplace add SnowLightPath/snow-light-place
+claude plugin install scribe@snow-light-place
 ```
 
 ### Project Setup
