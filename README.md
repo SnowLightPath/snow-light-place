@@ -18,16 +18,16 @@ A curated collection of plugins that extend Claude with specialized workflows. I
 
 ### Scribe — Supported Formats
 
-| Format | Extension | Tool Chain |
-|--------|-----------|------------|
-| Markdown | `.md` | Direct write |
-| PDF | `.pdf` | pandoc + xelatex |
-| Word | `.docx` | pandoc |
-| HTML | `.html` | pandoc |
-| Excel | `.xlsx` | Python + openpyxl |
-| PowerPoint | `.pptx` | Python + python-pptx |
-| Pencil Design | `.pen` | Pencil MCP |
-| Confluence | `--confluence` | Atlassian MCP |
+| Format | Extension | Tool Chain | Official Skill |
+|--------|-----------|------------|----------------|
+| Markdown | `.md` | Direct write | — |
+| PDF | `.pdf` | Python + reportlab | [`pdf`](https://github.com/anthropics/skills/tree/main/skills/pdf) |
+| Word | `.docx` | JS + docx-js | [`docx`](https://github.com/anthropics/skills/tree/main/skills/docx) |
+| HTML | `.html` | Python + markdown | — |
+| Excel | `.xlsx` | Python + openpyxl | [`xlsx`](https://github.com/anthropics/skills/tree/main/skills/xlsx) |
+| PowerPoint | `.pptx` | JS + pptxgenjs | [`pptx`](https://github.com/anthropics/skills/tree/main/skills/pptx) |
+| Pencil Design | `.pen` | Pencil MCP | — |
+| Confluence | `--confluence` | Atlassian MCP | — |
 
 ---
 
@@ -58,7 +58,7 @@ Install directly from `claude.com/plugins/` or search for **scribe** in the plug
        ↓
   /scribe:realize        Write & export
        ↓
-  report.pdf             Output file
+  report.docx            Output file
        ↓
   /scribe:reflect        Review & improve
        ↓
