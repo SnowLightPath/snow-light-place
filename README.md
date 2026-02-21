@@ -1,6 +1,6 @@
 # ✨ snow-light-place
 
-> A plugin marketplace for [Claude Code](https://code.claude.com/) and [Claude Cowork](https://claude.com/).
+> A plugin marketplace for [Claude Cowork](https://claude.com/product/cowork) and [Claude Code](https://code.claude.com/).
 
 ---
 
