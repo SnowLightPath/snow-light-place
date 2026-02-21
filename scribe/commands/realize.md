@@ -44,16 +44,32 @@ if [ -e "_scribe_tmp" ]; then
 fi
 ```
 
-7. Check format pipeline dependencies:
+7. Check dependencies for the target format only:
 
 ```bash
-# Python libraries (pre-installed in Claude Cowork sandbox)
-python3 -c "from reportlab.lib.pagesizes import A4" 2>/dev/null || echo "MISSING: reportlab"
-python3 -c "import openpyxl" 2>/dev/null || echo "MISSING: openpyxl"
-python3 -c "import markdown" 2>/dev/null || echo "MISSING: markdown (required for HTML output)"
-# npm packages (for DOCX/PPTX)
-npm list -g docx 2>/dev/null || echo "MISSING: docx"
-npm list -g pptxgenjs 2>/dev/null || echo "MISSING: pptxgenjs"
+case "{format}" in
+  pdf)
+    python3 -c "from reportlab.lib.pagesizes import A4" 2>/dev/null || echo "MISSING: reportlab"
+    ;;
+  html)
+    python3 -c "import markdown" 2>/dev/null || echo "MISSING: markdown (required for HTML output)"
+    ;;
+  xlsx)
+    python3 -c "import openpyxl" 2>/dev/null || echo "MISSING: openpyxl"
+    ;;
+  docx)
+    npm list -g docx 2>/dev/null || echo "MISSING: docx"
+    ;;
+  pptx)
+    npm list -g pptxgenjs 2>/dev/null || echo "MISSING: pptxgenjs"
+    ;;
+  md|pen|confluence)
+    # No local converter dependency required
+    ;;
+  *)
+    echo "WARNING: Unknown format '{format}'. Dependency checks skipped."
+    ;;
+esac
 ```
 
 If dependencies are missing, report and ask user whether to install.
