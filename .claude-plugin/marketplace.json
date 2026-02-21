@@ -3,6 +3,9 @@
   "owner": {
     "name": "SnowLightPath"
   },
+  "metadata": {
+    "description": "A plugin marketplace with curated workflows for Claude Code and Claude Cowork, including the Scribe document writing plugin."
+  },
   "plugins": [
     {
       "name": "scribe",
