@@ -3,6 +3,9 @@
   "owner": {
     "name": "SnowLightPath"
   },
+  "metadata": {
+    "description": "Claude Code plugin repository by SnowLightPath. Currently hosts the Scribe document writing plugin."
+  },
   "plugins": [
     {
       "name": "scribe",
