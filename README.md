@@ -58,7 +58,7 @@ Install directly from `claude.com/plugins/` or search for **scribe** in the plug
        ↓
   /scribe:realize        Write & export
        ↓
-  report.docx            Output file
+  report.docx       ←→   Human & LLM edit
        ↓
   /scribe:reflect        Review & improve
        ↓
