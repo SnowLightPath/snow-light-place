@@ -9,7 +9,7 @@ Draft outlines, write documents in parallel by section, output in any format.
 ### Local Testing
 
 ```bash
-claude --plugin-dir ./examples/scribe-plugin
+claude --plugin-dir ./scribe
 ```
 
 ### From Marketplace
@@ -24,7 +24,7 @@ claude plugin install scribe@snow-light-place
 After installing, copy the CLAUDE.md template to your project:
 
 ```bash
-cp examples/scribe-plugin/CLAUDE.md .claude/CLAUDE.md
+cp scribe/CLAUDE.md .claude/CLAUDE.md
 ```
 
 Edit `.claude/CLAUDE.md` to set your project name and customize detection targets.
