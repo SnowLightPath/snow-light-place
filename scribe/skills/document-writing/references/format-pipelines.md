@@ -53,12 +53,24 @@ from reportlab.lib.pagesizes import letter, A4
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak, Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.units import cm
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.cidfonts import UnicodeCIDFont
 
 doc = SimpleDocTemplate("{output_path}", pagesize=A4,
     topMargin=2.5*cm, bottomMargin=2.5*cm,
     leftMargin=2.5*cm, rightMargin=2.5*cm)
 styles = getSampleStyleSheet()
 story = []
+
+language = "{language}".lower()  # From scribe.md meta.language
+if language.startswith("ja"):
+    cjk_font = "HeiseiKakuGo-W5"
+    try:
+        pdfmetrics.registerFont(UnicodeCIDFont(cjk_font))
+        for style_name in ("Title", "Heading1", "Normal"):
+            styles[style_name].fontName = cjk_font
+    except Exception as exc:
+        print(f"WARNING: CJK font setup failed ({exc}); falling back to default font.")
 
 # Title
 story.append(Paragraph(document_title, styles['Title']))
@@ -75,7 +87,7 @@ doc.build(story)
 
 **Important**: Never use Unicode subscript/superscript characters in reportlab — use `<sub>` and `<super>` tags in Paragraph objects instead.
 
-**For Japanese documents**: Use a CJK-compatible font. Register with `pdfmetrics.registerFont()` if needed.
+**For Japanese documents**: Register and apply a CJK-compatible font (example above uses `HeiseiKakuGo-W5`).
 
 ---
 

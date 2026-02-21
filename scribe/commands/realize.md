@@ -31,12 +31,26 @@ Write the document following scribe.md, output in the specified format.
    - Look for `pdf`, `docx`, `pptx`, `xlsx` skills in `~/.claude/skills/` or `.claude/skills/`
    - If found for the target format → will use official skill in Phase 3
    - If not found → will use fallback pipeline from `format-pipelines.md`
-6. Check format pipeline dependencies:
+6. Remove stale temporary workspace from previous interrupted runs:
+
+```bash
+if [ -e "_scribe_tmp" ]; then
+  if [ -L "_scribe_tmp" ] || [ ! -d "_scribe_tmp" ]; then
+    echo "ERROR: _scribe_tmp exists but is not a normal directory. Remove it manually before continuing."
+    exit 1
+  else
+    rm -rf "_scribe_tmp"
+  fi
+fi
+```
+
+7. Check format pipeline dependencies:
 
 ```bash
 # Python libraries (pre-installed in Claude Cowork sandbox)
 python3 -c "from reportlab.lib.pagesizes import A4" 2>/dev/null || echo "MISSING: reportlab"
 python3 -c "import openpyxl" 2>/dev/null || echo "MISSING: openpyxl"
+python3 -c "import markdown" 2>/dev/null || echo "MISSING: markdown (required for HTML output)"
 # npm packages (for DOCX/PPTX)
 npm list -g docx 2>/dev/null || echo "MISSING: docx"
 npm list -g pptxgenjs 2>/dev/null || echo "MISSING: pptxgenjs"
@@ -47,7 +61,7 @@ If dependencies are missing, report and ask user whether to install.
 ### Phase 1: PREPARE
 
 1. Read all source files listed in `scribe.md ## Sources`
-2. Create temporary workspace: `_scribe_tmp/`
+2. Create temporary workspace: `_scribe_tmp/` (`mkdir -p _scribe_tmp`)
 3. For each source, extract relevant data and quotes per section assignment
 4. Calculate word budget per section (if `max-words` is set in scribe.md)
 
